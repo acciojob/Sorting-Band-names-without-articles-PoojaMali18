@@ -1,31 +1,20 @@
-// An array of band names
-let bandNames = ['The Rolling Stones', 'The Beatles', 'Aerosmith', 'Queen'];
+let regexp = /\bthe\b|\ban\b|\ba\b/gi;
+//console.log(str.replace(regexp," "));
 
-// Function to remove articles from a band name
-function removeArticles(name) {
-  // List of common articles
-  const articles = ['the', 'a', 'an'];
+let arr=['The Virupaksha Temple', 'a Victoria Memorial', 'an Tajmahal'];
+let articleless=[];
+let mp={};
 
-  // Split the name into words
-  const words = name.split(' ');
-
-  // Filter out articles from the words
-  const filteredWords = words.filter(word => !articles.includes(word.toLowerCase()));
-
-  // Join the filtered words back into a single string
-  return filteredWords.join(' ');
-}
-
-// Remove articles and sort the band names lexicographically
-bandNames = bandNames.map(removeArticles);
-bandNames.sort();
-
-// Get the ul element with the id 'band'
-const ulElement = document.getElementById('band');
-
-// Create list items and append them to the ul
-for (let i = 0; i < bandNames.length; i++) {
-  const liElement = document.createElement('li');
-  liElement.textContent = bandNames[i];
-  ulElement.appendChild(liElement);
-}
+for(let i=0;i<arr.length;i++)
+	{
+		let articlelessItem=arr[i].replace(regexp,"").trim();
+		articleless.push(articlelessItem);
+		mp[articlelessItem]=arr[i];
+	}
+articleless.sort();
+let ans= [];
+for(let i of articleless)
+	{
+		ans.push(mp[i]);
+	}
+console.log(ans);
